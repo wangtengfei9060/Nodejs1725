@@ -1,0 +1,98 @@
+@charset "utf-8";
+html,body,ul,li,ol,dl,dd,dt,p,h1,h2,h3,h4,h5,h6,form,fieldset,legend,img,input{margin:0;padding:0}
+body{font-family: "微软雅黑";}
+ul,ol,li{list-style:none;}
+b,strong{font-weight:100;}
+em,i{font-style:normal;}
+h1,h2,h3,h4,h5,h6{font-weight:100;font-size:16px;}
+u{text-decoration: none;}
+a{text-decoration: none;cursor: pointer;color: #333;}
+input{outline:none;}
+img{display:block;border:0;}
+.clearfix:after{content:".";clear:both;display:block;height:0;overflow: hidden;visibility: hidden;}
+.clearfix{zoom:1;}
+
+body{
+	background:#212121;
+}
+#tabbar-div{
+	width: 153px;
+	padding-left: 10px;
+	height: 34px;
+	padding-top: 0px;
+	background: #303030;
+	/*margin: 0 auto;*/
+}
+#tabbar-div p{
+	font-size: 12px;
+	color: #fff;
+	height: 34px;
+	line-height: 34px;
+	margin: 1px 0 0 0;
+	font-weight: 900;
+}
+#main-div ul{
+	color: #fff;
+}
+#main-div ul li{
+	cursor: pointer;
+	font-size: 12px;
+}
+
+#main-div ul li:hover{
+	background-color: #797979;
+}
+
+.icon-1{
+	background:#575757 url(../img/menu_1.png) no-repeat 9px 0;
+}
+.icon-2{
+	background:#575757 url(../img/menu_2.png) no-repeat 9px 0;
+}
+.icon-3{
+	background:#575757 url(../img/menu_3.png) no-repeat 9px 0;
+}
+.icon-4{
+	background:#575757 url(../img/menu_4.png) no-repeat 9px 0;
+}
+.icon-5{
+	background:#575757 url(../img/menu_5.png) no-repeat 9px 0;
+}
+.icon-6{
+	background:#575757 url(../img/menu_6.png) no-repeat 9px 0;
+}
+.icon-7{
+	background:#575757 url(../img/menu_7.png) no-repeat 9px 0;
+}
+.icon-8{
+	background:#575757 url(../img/menu_8.png) no-repeat 9px 0;
+}
+.icon-9{
+	background:#575757 url(../img/menu_9.png) no-repeat 9px 0;
+}
+.icon-10{
+	background:#575757 url(../img/menu_10.png) no-repeat 9px 0;
+}
+.icon-11{
+	background:#575757 url(../img/menu_11.png) no-repeat 9px 0;
+}
+.icon-12{
+	background:#575757 url(../img/menu_12.png) no-repeat 9px 0;
+}
+.icon-13{
+	background:#575757 url(../img/menu_13.png) no-repeat 9px 0;
+}
+.icon-14{
+	background:#575757 url(../img/menu_14.png) no-repeat 9px 0;
+}
+.icon-15{
+	background:#575757 url(../img/menu_15.png) no-repeat 9px 0;
+}
+.collapse{
+	text-indent: 40px;
+	display: block;
+	border-top: #7f7f7f 1px solid;
+	color: #fff;
+	line-height: 42px;
+	text-align: left;
+}

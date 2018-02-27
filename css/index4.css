@@ -1,0 +1,74 @@
+@charset "utf-8";
+html,body,ul,li,ol,dl,dd,dt,p,h1,h2,h3,h4,h5,h6,form,fieldset,legend,img,input{margin:0;padding:0}
+body{font-family: "微软雅黑";}
+ul,ol,li{list-style:none;}
+b,strong{font-weight:100;}
+em,i{font-style:normal;}
+h1,h2,h3,h4,h5,h6{font-weight:100;font-size:16px;}
+u{text-decoration: none;}
+a{text-decoration: none;cursor: pointer;color: #333;}
+input{outline:none;}
+img{display:block;border:0;}
+.clearfix:after{content:".";clear:both;display:block;height:0;overflow: hidden;visibility: hidden;}
+.clearfix{zoom:1;}
+
+body{
+	padding: 10px;
+	min-width: 773px;
+	background: orange;
+}
+h1{
+	border-bottom: 1px solid #ccc;
+	color: #333;
+	padding: 7px 10px;
+	margin:  0 0 10px 0;
+	overflow: hidden;
+}
+.addShop a{
+	float: right;
+	height: 26px;
+	line-height: 26px;
+	padding: 0 10px 0 23px;
+	background: #c43926 url(../img/icon_add02.gif) no-repeat 6px center;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 13px;
+	text-align: center;
+}
+.sim{
+	color: #4c4c4c;
+	font-size: 18px;
+}
+.help{
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+.button{
+	margin: 2px 2px;
+	padding: 5px 15px 5px;
+	background: #ff3f3f;
+	color: #fff;
+	cursor: pointer;
+	border-radius: 3px;
+	border: none;
+}
+.list-div{
+	width: 100%;
+}
+.list-div table{
+	width: 100%;
+}
+.list-div th{
+	line-height: 39px;
+	white-space: nowrap;
+	background: #f3f3f3 url(../img/th_bg.gif) repeat-x ;
+}
+.list-div th a{
+	color: #111;
+	font-size: 12px;
+	font-weight: 100;
+}
+.list-div th img{
+	display: inline-block;
+}

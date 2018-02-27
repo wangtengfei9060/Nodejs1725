@@ -12,4 +12,17 @@ img{display:block;border:0;}
 .clearfix:after{content:".";clear:both;display:block;height:0;overflow: hidden;visibility: hidden;}
 .clearfix{zoom:1;}
 
+body{
+	background: #303030;
+}
+#butt{
+	position: absolute;
+	top: 50%;
+	width: 10px;
+	height: 100%;
+}
 
+#img{
+	width: 10px;
+	height: 30px;
+}
