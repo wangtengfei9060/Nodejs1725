@@ -1,18 +1,39 @@
 var express = require('express');
 var router = express.Router();
 var UserModel = require("../model/UserModel");
-
+//var md5  = require("md5")
+//var GoodsModel = require("../model/Goods")
+//var multiparty = require('multiparty');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-
-router.get('/login', function(req, res) {
+//前台主页面
+router.get('/index1', function(req, res, next) {
+  res.render('index1', { title: 'Express' });
+});
+router.get('/index2', function(req, res, next) {
+  res.render('index2', { title: 'Express' });
+});
+router.get('/index3', function(req, res, next) {
+  res.render('index3', { title: 'Express' });
+});
+router.get('/index4', function(req, res, next) {
+  res.render('index4', { title: 'Express' });
+});
+router.get('/index5', function(req, res, next) {
+  res.render('index5', { title: 'Express' });
+});
+router.get('/login', function(req, res,next) {
   res.render('login',{});
 });
 
-router.post('/api/login',function(req,res){
+//后台登陆页面
+router.get('/login', function(req, res,next) {
+  res.render('login',{});
+});
+router.post('/api/login',function(req,res,next){
 	var username = req.body.username;
 	var pwd = req.body.pwd;
 	
