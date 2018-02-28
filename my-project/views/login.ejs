@@ -29,8 +29,8 @@
 <script>	
 	$('#login').click(function(){
 			$.ajax({
-				type:"post",
 				url:"/api/login",
+				type:"post",
 				data: {
 					username : $('#username').val(),
 					pwd : $('#pwd').val()

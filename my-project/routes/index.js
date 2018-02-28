@@ -1,12 +1,14 @@
 var express = require('express');
 var router = express.Router();
+var UserModel = require("../model/UserModel");
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/api/login', function(req, res, next) {
+router.get('/login', function(req, res) {
   res.render('login',{});
 });
 
