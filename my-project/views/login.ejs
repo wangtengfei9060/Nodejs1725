@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>ECSHOP管理中心</title>
+	<link rel="stylesheet" href="../../css/login.css" />
+
+</head>
+<body>
+	<form action="index.html" method="post" name="theForm">
+		<div class="login-logo">
+			<img src="../../img/shopex.png" alt="" />
+		</div>
+		<div class="center">
+			<div class="center-logo">
+			</div>
+			<div class="z-bd">
+				<input type="text" id="username" value="用户名" />
+				<span class="bd1"></span><br>
+				<input type="password" id="pwd" value="密码" />
+				<span class="bd2"></span>
+				<input type="button" value="登录" id="login" />
+			</div>
+		</div>
+	</form>
+</body>
+</html>
+<script src="../../js/jquery-1.11.1.min.js"></script>
+<script>	
+	$('#login').click(function(){
+			$.ajax({
+				type:"post",
+				url:"/api/login",
+				data: {
+					username : $('#username').val(),
+					pwd : $('#pwd').val()
+				},
+				success : function(res){
+					console.log( res );
+				}
+			});
+		}
+	)
+	
+	$('#username').focus(function(){
+		this.value = "";
+	})
+	
+	$('#pwd').focus(function(){
+		this.value = "";
+	})
+</script>
