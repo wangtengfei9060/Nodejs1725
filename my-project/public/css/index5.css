@@ -125,20 +125,138 @@ h1{
     text-decoration: none;
     font-weight: 400;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.ke-container{
+	width: 100%;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+.ke-toolbar{
+	/*border-bottom: 1px solid #ccc;*/
+	background-color: #f0f0ee;
+	padding: 2px 5px;
+	text-align: left;
+	overflow: hidden;
+	zoom: 1;
+}
+.ke-toolbar .ke-outline{
+    border: 1px solid #F0F0EE;
+    margin: 1px;
+    padding: 1px 2px;
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+    cursor: pointer;
+    display: block;
+    float: left;
+    background-image: url(../img/default.png);
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+.souse1{
+	background-position: 0px 0px;
+}
+.souse2{
+	background-position: 0px -48px;
+}
+.souse3{
+	background-position: 0px -96px;
+}
+.souse4{
+	background-position: 0px -144px;
+}
+.souse5{
+	background-position: 0px -192px;
+}
+.souse6{
+	background-position: 0px -240px;
+}
+.souse7{
+	background-position: 0px -288px;
+}
+.souse8{
+	background-position: 0px -336px;
+}
+.souse9{
+	background-position: 0px -384px;
+}
+.souse10{
+	background-position: 0px -432px;
+}
+.souse11{
+	background-position: 0px -480px;
+}
+.souse12{
+	background-position: 0px -528px;
+}
+.souse13{
+	background-position: 0px -576px;
+}
+.souse14{
+	background-position: 0px -624px;
+}
+.souse15{
+	background-position: 0px -672px;
+}
+.souse16{
+	background-position: 0px -720px;
+}
+.souse17{
+	background-position: 0px -768px;
+}
+.souse18{
+	background-position: 0px -816px;
+}
+.souse19{
+	background-position: 0px -864px;
+}
+.souse20{
+	background-position: 0px -912px;
+}
+.souse21{
+	background-position: 0px -960px;
+}
+.souse22{
+	background-position: 0px -1008px;
+}
+.souse23{
+	background-position: 0px -1056px;
+}
+.souse24{
+	background-position: 0px -1104px;
+}
+.souse25{
+	background-position: 0px -1152px;
+}
+.souse26{
+	background-position: 0px -1200px;
+}
+.hr{
+	height: 1px;
+	clear: both;
+}
+.ke-edit{
+	height: 238px;
+	width: 100%;
+	padding: 0;
+}
+.button-div{
+	text-align: center;
+	padding: 3px 0;
+}
+/*.footer{
+	border: 1px solid #ddd;
+	background: #ddd;
+	font-size: 12px;
+	color: #9CACAF;
+	text-align: center;
+	padding: 15px;
+	margin: 10px 0;
+}*/
+.yc{
+	display: none;
+}
 

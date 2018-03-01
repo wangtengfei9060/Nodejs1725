@@ -5,6 +5,7 @@
 	<title></title>
 	<link rel="stylesheet" href="/css/index2.css" />
 </head>
+<script src="/js/jquery-1.11.1.min.js"></script>
 <body style="cursor: auto;">
 	<div id=tabbar-div>
 		<p>导航菜单</p>
@@ -12,7 +13,7 @@
 	<div id="main-div">
 	   	<ul id="menu-list">
 	    	<li class="icon-1 collapse">商品管理
-	    		<ul style="display: block;">
+	    		<ul>
 			        <li class="menu-item"><a href="http://localhost:8080/index4" target="main-frame">商品列表</a></li>
 			        <li class="menu-item"><a href="http://localhost:8080/index5" target="main-frame" class=" on">添加新商品</a></li>
 			        <li class="menu-item"><a href="javascript:;" target="main-frame">商品分类</a></li>
@@ -45,3 +46,20 @@
 	</div>
 </body>
 </html>
+<script>
+	$('.menu-item').click(function(e){
+		var e = e || event;
+		e.stopPropagation? e.stopPropagation(): e.cancelBubble = true;
+	})
+	var flag = true;//为关闭状态
+	$('#menu-list').click(function(){
+		if(flag){
+			$('#menu-list .icon-1').css("background-image","url(/img/menu1_1.png)");
+			$('#menu-list li:has(ul) ul').slideToggle();
+		}else{
+			$('#menu-list .icon-1').css("background-image","url(/img/menu_1.png)");
+			$('#menu-list li:has(ul) ul').slideToggle();
+		}
+		flag = !flag;
+	})
+</script>

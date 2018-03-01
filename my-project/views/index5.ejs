@@ -5,10 +5,11 @@
 	<title></title>
 	<link rel="stylesheet" href="/css/index5.css" />
 </head>
+<script src="/js/jquery-1.11.1.min.js"></script>
 <body>
 	<h1>
 		<span class="addShop">
-			<a href="javascript:;">商品列表</a>
+			<a href="http://localhost:8080/index4">商品列表</a>
 		</span>
 		<span class="manag sim">
 			<a href="javascript:;">ECSHOP 管理中心</a>
@@ -34,218 +35,419 @@
 			</p>
 		</div>
 		<div id="yabbody-div">
-			<form action="" method="post" name="theForm">
-				<table width="90%" id="general-table" align="center" class="goods-info" style="display: table;">
-					<tbody>
-						<tr>
-							<td class="lable">商品名称：</td>
-							<td>
-								<input type="text" name="good-name" style="float: left;" size="30" />
-								<select name="goods-name-style">
-									<option value="">字体样式</option>
-									<option value="strong">加粗</option>
-									<option value="em">斜体</option>
-									<option value="u">下划线</option>
-									<option value="del-str">删除线</option>
-								</select>
-								<span class="require-field">*</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="lable">商品货号：</td>
-							<td>
-								<input type="text" name="goods-sn" size="20" />
-								<span id="goods-sn-notice" style="color: red;"></span><br>
-								<span class="notice-span" style="display: block;" id="noticeGoodsSn">如果您不输入商品货号，系统将自动生成一个唯一的货号。</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="lable">商品分类：</td>
-							<td>
-								<select name="cat_id" onchange="hideCatDiv()">
-									<option value="0">请选择...</option>
-									<option value="132">钻石</option>
-									<option value="190">&nbsp;&nbsp;&nbsp;&nbsp;衬衫</option>
-									<option value="193">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;短袖衬衫</option>
-									<option value="194">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;长袖衬衫</option>
-									<option value="170">&nbsp;&nbsp;&nbsp;&nbsp;裤子</option>
-									<option value="623">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;休闲短裤</option>
-									<option value="173">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;休闲裤</option>
-									<option value="174">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;牛仔裤</option>
-									<option value="171">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;西裤</option>
-									<option value="172">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;牛仔中裤</option>
-									<option value="629">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;休闲分裤</option>
-									<option value="160">&nbsp;&nbsp;&nbsp;&nbsp;外套</option>
-									<option value="162">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;卫衣</option>
-									<option value="167">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;棉服</option>
-								</select>
-								<a href="javascript:;" class="special">添加分类</a>
-								<span class="require-field">*</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="lable">拓展分类：</td>
-							<td>
-								<input type="submit" class="button" value="添加" />
-							</td>
-						</tr>
-						<tr>
-							<td class="lable">商品品牌：</td>
-							<td>
-								<select name="brand_id">
-									<option value="0">请选择...</option>
-									<option value="45">gr</option>
-									<option value="33">空间大师</option>
-									<option value="32">溢彩年华</option>
-									<option value="31">EVENY</option>
-									<option value="30">圣迪奥</option>
-									<option value="29">韩都衣舍</option>
-									<option value="28">betu百图</option>
-									<option value="27">艾夫斯</option>
-									<option value="26">太平鸟</option>
-									<option value="25">O.SA</option>
-									<option value="34">美好家</option>
-									<option value="35">生活诚品</option>
-									<option value="44">kk</option>
-									<option value="43">帮宝适</option>
-									<option value="42">贝亲</option>
-									<option value="41">雅培</option>
-									<option value="40">好事达</option>
-									<option value="39">千弘</option>
-									<option value="38">美亿佳</option>
-									<option value="37">大豪</option>
-									<option value="36">宝优妮</option>
-									<option value="24">裂帛</option>
-									<option value="23">JNBY 江南布衣</option>
-									<option value="10">金立</option>
-									<option value="9">联想</option>
-									<option value="8">惠普</option>
-									<option value="7">美的</option>
-									<option value="6">天翼</option>
-									<option value="5">漫步者</option>
-									<option value="4">希捷</option>
-									<option value="3">方正</option>
-									<option value="2">APPLE</option>
-									<option value="11"> 恒基伟业</option>
-									<option value="12">夏普</option>
-									<option value="22">LILY</option>
-									<option value="21">白领</option>
-									<option value="19">acer</option>
-									<option value="18">AMD</option>
-									<option value="17">爱普生</option>
-									<option value="20">茵佳妮</option>
-									<option value="15">乐华</option>
-									<option value="14">创维</option>
-									<option value="13">索尼</option>
-									<option value="1">有讯网络</option>
-								</select>
-								<a href="javascript:;" class="special">添加品牌</a>
-							</td>
-						</tr>
-						<tr>
-							<td class="lable">本店售价：</td>
-							<td>
-								<input type="text" name="shop_price" value="0" size="20" />
-								<input type="button" value="按市场价计算" />
-								<span class="require-field">*</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="lable">会员价格：</td>
-							<td>
-								注册用户<input type="text" value="-1" size="6" />
-								代销用户<input type="text" value="-1" size="6" />
-								vip<input type="text" value="-1" size="6" /><br>
-								<span class="notice-span">会员价格为-1时表示会员价格按会员等级折扣率计算。你也可以为每个等级指定一个固定价格</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="lable">商品优惠价格：</td>
-							<td>
-								[+]优惠数量<input type="text" name="volume_number[]" value="-1" size="6" />
-								优惠价格<input type="text" name="volume_price[]" value="-1" size="6" />
-								vip<input type="text" value="-1" size="6" /><br>
-								<span class="notice-span">购买数量达到优惠数量时享受的优惠价格</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="lable">市场售价：</td>
-							<td>
-								<input type="text" name="market_price" value="0" />
-								<input type="button" value="取整数" />
-							</td>
-						</tr>
-						<tr>
-							<td class="lable">虚拟销量：</td>
-							<td>
-								<input type="text" name="virtual_sales" value="0" />
-							</td>
-						</tr>
-						<tr>
-							<td class="lable">赠送消费积分数：</td>
-							<td>
-								<input type="text" name="give_integral" value="-1" /><br>
-								<span class="notice-span">购买该商品时赠送消费积分数,-1表示按商品价格赠送</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="lable"> 赠送等级积分数：</td>
-							<td>
-								<input type="text" name="rank_integral" value="-1" /><br>
-								<span class="notice-span">购买该商品时赠送等级积分数,-1表示按商品价格赠送</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="lable"> 积分购买金额：</td>
-							<td>
-								<input type="text" name="integral" value="0" /><br>
-								<span class="notice-span">(此处需填写金额)购买该商品时最多可以使用积分的金额</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="lable">
-								<lable>
-									<input type="checkbox" id="is_promote" />
-								</lable>
-								 促销价：
-							</td>
-							<td>
-								<input type="text" value="0" name="promote_price" style="background: #c0c0c0;" />
-							</td>
-						</tr>
-						<tr>
-							<td class="lable"> 促销日期：</td>
-							<td>
-								<input type="text" name="promote_start_date" value="2018-02-27" size="10" />
-								<input type="button" name="selbtn1" class="button" value="选择" /> - 
-								<input type="text" name="promote_end_date" value="2018-03-27" size="10" />
-								<input type="button" name="selbtn2" class="button" value="选择" />
-							</td>
-						</tr>
-						<tr>
-							<td class="lable"> 上传商品图片：</td>
-							<td>
-								<input type="file" name="goods-img" size="35" />
-								<!--<img src="../Nodejs1725/img/no.gif" alt="" />--><br>
-								<input type="text" size="40" value="商品外部URL" name="goods_img_url" />
-							</td>
-						</tr>
-						<tr>
-							<td class="lable"> 上传商品缩略图：</td>
-							<td>
-								<input type="file" name="goods-img" size="35" />
-								<!--<img src="../Nodejs1725/img/no.gif" alt="" />--><br>
-								<input type="text" size="40" value="商品缩略图外部URL" name="goods_thumb_url" /><br>
-								<leable>
-									<input type="checkbox" name="auto_thumb" checked="true"  />自动生成商品缩略图
-								</leable>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</form>
+			<div class="comment">
+				<form action="" method="post" name="theForm">
+					<table width="90%" id="general-table" align="center" class="goods-info" style="display: table;">
+						<tbody>
+							<tr>
+								<td class="lable">商品名称：</td>
+								<td>
+									<input type="text" name="good-name" style="float: left;" size="30" />
+									<select name="goods-name-style">
+										<option value="">字体样式</option>
+										<option value="strong">加粗</option>
+										<option value="em">斜体</option>
+										<option value="u">下划线</option>
+										<option value="del-str">删除线</option>
+									</select>
+									<span class="require-field">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">商品货号：</td>
+								<td>
+									<input type="text" name="goods-sn" size="20" />
+									<span id="goods-sn-notice" style="color: red;"></span><br>
+									<span class="notice-span" style="display: block;" id="noticeGoodsSn">如果您不输入商品货号，系统将自动生成一个唯一的货号。</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">商品分类：</td>
+								<td>
+									<select name="cat_id" onchange="hideCatDiv()">
+										<option value="0">请选择...</option>
+										<option value="132">钻石</option>
+										<option value="190">&nbsp;&nbsp;&nbsp;&nbsp;衬衫</option>
+										<option value="193">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;短袖衬衫</option>
+										<option value="194">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;长袖衬衫</option>
+										<option value="170">&nbsp;&nbsp;&nbsp;&nbsp;裤子</option>
+										<option value="623">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;休闲短裤</option>
+										<option value="173">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;休闲裤</option>
+										<option value="174">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;牛仔裤</option>
+										<option value="171">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;西裤</option>
+										<option value="172">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;牛仔中裤</option>
+										<option value="629">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;休闲分裤</option>
+										<option value="160">&nbsp;&nbsp;&nbsp;&nbsp;外套</option>
+										<option value="162">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;卫衣</option>
+										<option value="167">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;棉服</option>
+									</select>
+									<a href="javascript:;" class="special">添加分类</a>
+									<span class="require-field">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">拓展分类：</td>
+								<td>
+									<input type="submit" class="button" value="添加" />
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">商品品牌：</td>
+								<td>
+									<select name="brand_id">
+										<option value="0">请选择...</option>
+										<option value="45">gr</option>
+										<option value="33">空间大师</option>
+										<option value="32">溢彩年华</option>
+										<option value="31">EVENY</option>
+										<option value="30">圣迪奥</option>
+										<option value="29">韩都衣舍</option>
+										<option value="28">betu百图</option>
+										<option value="27">艾夫斯</option>
+										<option value="26">太平鸟</option>
+										<option value="25">O.SA</option>
+										<option value="34">美好家</option>
+										<option value="35">生活诚品</option>
+										<option value="44">kk</option>
+										<option value="43">帮宝适</option>
+										<option value="42">贝亲</option>
+										<option value="41">雅培</option>
+										<option value="40">好事达</option>
+										<option value="39">千弘</option>
+										<option value="38">美亿佳</option>
+										<option value="37">大豪</option>
+										<option value="36">宝优妮</option>
+										<option value="24">裂帛</option>
+										<option value="23">JNBY 江南布衣</option>
+										<option value="10">金立</option>
+										<option value="9">联想</option>
+										<option value="8">惠普</option>
+										<option value="7">美的</option>
+										<option value="6">天翼</option>
+										<option value="5">漫步者</option>
+										<option value="4">希捷</option>
+										<option value="3">方正</option>
+										<option value="2">APPLE</option>
+										<option value="11"> 恒基伟业</option>
+										<option value="12">夏普</option>
+										<option value="22">LILY</option>
+										<option value="21">白领</option>
+										<option value="19">acer</option>
+										<option value="18">AMD</option>
+										<option value="17">爱普生</option>
+										<option value="20">茵佳妮</option>
+										<option value="15">乐华</option>
+										<option value="14">创维</option>
+										<option value="13">索尼</option>
+										<option value="1">有讯网络</option>
+									</select>
+									<a href="javascript:;" class="special">添加品牌</a>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">本店售价：</td>
+								<td>
+									<input type="text" name="shop_price" value="0" size="20" />
+									<input type="button" value="按市场价计算" />
+									<span class="require-field">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">会员价格：</td>
+								<td>
+									注册用户<input type="text" value="-1" size="6" />
+									代销用户<input type="text" value="-1" size="6" />
+									vip<input type="text" value="-1" size="6" /><br>
+									<span class="notice-span">会员价格为-1时表示会员价格按会员等级折扣率计算。你也可以为每个等级指定一个固定价格</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">商品优惠价格：</td>
+								<td>
+									[+]优惠数量<input type="text" name="volume_number[]" value="-1" size="6" />
+									优惠价格<input type="text" name="volume_price[]" value="-1" size="6" />
+									vip<input type="text" value="-1" size="6" /><br>
+									<span class="notice-span">购买数量达到优惠数量时享受的优惠价格</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">市场售价：</td>
+								<td>
+									<input type="text" name="market_price" value="0" />
+									<input type="button" value="取整数" />
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">虚拟销量：</td>
+								<td>
+									<input type="text" name="virtual_sales" value="0" />
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">赠送消费积分数：</td>
+								<td>
+									<input type="text" name="give_integral" value="-1" /><br>
+									<span class="notice-span">购买该商品时赠送消费积分数,-1表示按商品价格赠送</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable"> 赠送等级积分数：</td>
+								<td>
+									<input type="text" name="rank_integral" value="-1" /><br>
+									<span class="notice-span">购买该商品时赠送等级积分数,-1表示按商品价格赠送</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable"> 积分购买金额：</td>
+								<td>
+									<input type="text" name="integral" value="0" /><br>
+									<span class="notice-span">(此处需填写金额)购买该商品时最多可以使用积分的金额</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">
+									<lable>
+										<input type="checkbox" id="is_promote" />
+									</lable>
+									 促销价：
+								</td>
+								<td>
+									<input type="text" value="0" name="promote_price" style="background: #c0c0c0;" />
+								</td>
+							</tr>
+							<tr>
+								<td class="lable"> 促销日期：</td>
+								<td>
+									<input type="text" name="promote_start_date" value="2018-02-27" size="10" />
+									<input type="button" name="selbtn1" class="button" value="选择" /> - 
+									<input type="text" name="promote_end_date" value="2018-03-27" size="10" />
+									<input type="button" name="selbtn2" class="button" value="选择" />
+								</td>
+							</tr>
+							<tr>
+								<td class="lable"> 上传商品图片：</td>
+								<td>
+									<input type="file" name="goods-img" size="35" />
+									<!--<img src="../Nodejs1725/img/no.gif" alt="" />--><br>
+									<input type="text" size="40" value="商品外部URL" name="goods_img_url" />
+								</td>
+							</tr>
+							<tr>
+								<td class="lable"> 上传商品缩略图：</td>
+								<td>
+									<input type="file" name="goods-img" size="35" />
+									<!--<img src="../Nodejs1725/img/no.gif" alt="" />--><br>
+									<input type="text" size="40" value="商品缩略图外部URL" name="goods_thumb_url" /><br>
+									<leable>
+										<input type="checkbox" name="auto_thumb" checked="true"  />自动生成商品缩略图
+									</leable>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+			<div class="ke-container comment yc">
+				<div class="ke-toolbar">
+					<span class="ke-outline souse1"></span>
+					<span class="ke-outline souse2"></span>
+					<span class="ke-outline souse3"></span>
+					<span class="ke-outline souse4"></span>
+					<span class="ke-outline souse5"></span>
+					<span class="ke-outline souse6"></span>
+					<span class="ke-outline souse7"></span>
+					<span class="ke-outline souse8"></span>
+					<span class="ke-outline souse9"></span>
+					<span class="ke-outline souse10"></span>
+					<span class="ke-outline souse11"></span>
+					<span class="ke-outline souse12"></span>
+					<span class="ke-outline souse13"></span>
+					<span class="ke-outline souse14"></span>
+					<span class="ke-outline souse15"></span>
+					<span class="ke-outline souse16"></span>
+					<span class="ke-outline souse17"></span>
+					<span class="ke-outline souse18"></span>
+					<span class="ke-outline souse19"></span>
+					<span class="ke-outline souse20"></span>
+					<span class="ke-outline souse21"></span>
+					<span class="ke-outline souse22"></span>
+					<span class="ke-outline souse23"></span>
+					<span class="ke-outline souse24"></span>
+					<span class="ke-outline souse25"></span>
+					<span class="ke-outline souse26"></span>
+					<div class="hr"></div>
+					<span class="ke-outline souse1"></span>
+					<span class="ke-outline souse2"></span>
+					<span class="ke-outline souse3"></span>
+					<span class="ke-outline souse4"></span>
+					<span class="ke-outline souse5"></span>
+					<span class="ke-outline souse6"></span>
+					<span class="ke-outline souse7"></span>
+					<span class="ke-outline souse8"></span>
+					<span class="ke-outline souse9"></span>
+					<span class="ke-outline souse10"></span>
+					<span class="ke-outline souse11"></span>
+					<span class="ke-outline souse12"></span>
+					<span class="ke-outline souse13"></span>
+					<span class="ke-outline souse14"></span>
+					<span class="ke-outline souse15"></span>
+					<span class="ke-outline souse16"></span>
+					<span class="ke-outline souse17"></span>
+					<span class="ke-outline souse18"></span>
+					<span class="ke-outline souse19"></span>
+					<span class="ke-outline souse20"></span>
+					<span class="ke-outline souse21"></span>
+					<span class="ke-outline souse22"></span>
+					<span class="ke-outline souse23"></span>
+					<span class="ke-outline souse24"></span>
+					<span class="ke-outline souse25"></span>
+					<span class="ke-outline souse26"></span>
+				</div>
+				<div class="ke-edit">
+					<iframe src="" width="100%" height="238px"></iframe>
+				</div>
+			</div>
+			<div class="comment yc">
+				<form action="" method="post" name="theForm">
+					<table width="90%" id="general-table" align="center" class="goods-info" style="display: table;">
+						<tbody>
+							<tr>
+								<td class="lable">商品重量：</td>
+								<td>
+									<input type="text" name="good-name" style="float: left;" size="12" />
+									<select name="goods-name-style">
+										<option value="">千克</option>
+										<option value="ke">克</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">商品库存数量：</td>
+								<td>
+									<input type="text" name="goods-sn" size="12" value="1" />
+									<span id="goods-sn-notice" style="color: red;"></span><br>
+									<span class="notice-span" style="display: block;" id="noticeGoodsSn">如果您不输入商品货号，系统将自动生成一个唯一的货号。</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">库存警告数量：</td>
+								<td>
+									<input type="text" name="goods-sn" size="12" value="1" />
+									<span id="goods-sn-notice" style="color: red;"></span><br>
+								</td>
+							</tr>
+							
+							
+							<tr>
+								<td class="lable">加入推荐：</td>
+								<td>
+									<input type="checkbox" name="volume_number[]" value="-1" size="6" />精品
+									<input type="checkbox" name="volume_price[]" value="-1" size="6" />新品
+									<input type="checkbox" value="-1" size="6" />热销<br>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">上架：</td>
+								<td>
+									<input type="checkbox" checked="true" value="-1" size="6" /> 打勾表示允许销售，否则不允许销售。<br>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">能作为普通商品销售：</td>
+								<td>
+									<input type="checkbox" checked="true" value="-1" size="6" /> 打勾表示能作为普通商品销售，否则只能作为配件或赠品销售。<br>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">是否为免运费商品：</td>
+								<td>
+									<input type="checkbox" value="-1" size="6" />  打勾表示此商品不会产生运费花销，否则按照正常运费计算。<br>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">商品关键词：</td>
+								<td>
+									<input type="text" name="market_price" value="" />
+									用空格分隔
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">商品简单描述：</td>
+								<td>
+									<textarea name="goods_brief" rows="3" cols="40"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td class="lable">商家备注：</td>
+								<td>
+									<textarea name="goods_brief" rows="3" cols="40"></textarea><br>
+									<span class="notice-span">仅供商家自己看的信息</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+			<div class="comment yc">
+				<form action="" method="post" name="theForm">
+					<table width="90%" id="general-table" align="center" class="goods-info" style="display: table;">
+						<tbody>
+							<tr>
+								<td class="lable">商品类型：</td>
+								<td>
+									<select name="goods_type" id="">
+										<option value="1">请选择商品类型</option>
+										<option value="2">书</option>
+										<option value="3">音乐</option>
+										<option value="4">电影</option>
+										<option value="5">手机</option>
+										<option value="6">笔记本电脑</option>
+										<option value="7">数码相机</option>
+										<option value="8">数码摄像机</option>
+										<option value="9">化妆品</option>
+										<option value="10">精品手机</option>
+										<option value="11">服装</option>
+										<option value="12">液晶电视</option>
+										<option value="13">美妆</option>
+										<option value="14">书</option>
+										<option value="15">音乐</option>
+										<option value="16">电影</option>
+										<option value="17">手机</option>
+										<option value="18">笔记本电脑</option>
+										<option value="19">数码相机</option>
+										<option value="20">数码摄像机</option>
+										<option value="21">化妆品</option>
+										<option value="22">精品手机</option>
+										<option value="23">服装</option>
+										<option value="24">液晶电视</option>
+									</select><br>
+									<span class="notice-span">请选择商品的所属类型，进而完善此商品的属性</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+			<div class="button-div">
+				<input type="button" class="button" value="确定" />
+				<input type="reset" class="button" value="重置" />
+			</div>
+		
+		
+		
 		</div>
-		<div></div>
 	</div>
+	<!--<div class="footer">
+		共执行 7 个查询，用时 0.022329 秒，Gzip 已禁用，内存占用 3.574 MB<br>
+		版权所有 © 2005-2018 上海商派软件有限公司，并保留所有权利。
+	</div>-->
 </body>
 </html>
+<script>
+	$('.tabbar-div span').click(function(){
+		$(this).addClass("tab-front").siblings().addClass("tab-back").removeClass("tab-front");
+//		$(this).css("background","#fefefe").siblings().css("background","");
+		var index = $(this).index();
+		$('.comment').eq(index).show().siblings().hide();
+	})
+</script>

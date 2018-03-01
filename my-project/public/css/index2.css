@@ -88,6 +88,9 @@ body{
 .icon-15{
 	background:#575757 url(../img/menu_15.png) no-repeat 9px 0;
 }
+.icon-1 ul{
+	display: none;
+}
 .collapse{
 	text-indent: 40px;
 	display: block;
