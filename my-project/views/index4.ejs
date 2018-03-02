@@ -5,6 +5,7 @@
 	<title>ECSHOP 管理中心 - 商品列表 </title>
 	<link rel="stylesheet" href="/css/index4.css" />
 </head>
+<script src="/js/jquery-1.11.1.min.js"></script>
 <body>
 	<h1>
 		<span class="addShop">
@@ -20,15 +21,15 @@
 			</a>
 		</span>
 	</h1>
-	<form action="">
-		<input type="text" name="keyword" size="15" />
+	<!--<form action="">-->
+		<input type="text" name="keyword" size="15" class="keyword" />
 		<input type="submit" value="搜索" class="button" />
 		<div class="list-div">
-			<table cellpadding="3" cellspacing="1">
+			<table cellpadding="3" cellspacing="0" border="1" class="table_goods">
 				<tbody>
-					<tr>
-						<th>
-							<input type="checkbox" />
+					<tr class="goodstr">
+						<th class="left">
+							<input type="checkbox" id="ch" />
 							<a href="javascript:;">编号</a>
 							<img src="/img/sort_desc.gif" alt="" />
 						</th>
@@ -65,20 +66,71 @@
 						<th>
 							<a href="javascript:;">操作</a>
 						</th>
-					</tr>	
+					</tr>
+					<% for(var i=0;i<list.length;i++){ %>
+					<tr>
+						<td class="left">
+							<input type="checkbox" name="check" id="check" value="" />
+							<span><%= list[i].identifie %></span>
+						</td>
+						<td class="first-cell">
+							<span><%= list[i].goods_name %></span>
+						</td>
+						<td class="cen">
+							<span><%= list[i].goods_sn %></span>
+						</td>
+						<td class="cen">
+							<span><%= list[i].price %></span>
+						</td>
+						<td clas="cen">
+							<img src="/img/no.gif" />
+						</td>
+						<td clas="cen">
+							<img src="/img/yes.gif" />
+						</td>
+						<td clas="cen">
+							<img src="/img/no.gif" />
+						</td>
+						<td clas="cen">
+							<img src="/img/yes.gif" />
+						</td>
+						<td class="cen">
+							<span><%= list[i].market_price %></span>
+						</td>
+						<td class="cen">
+							<span><%= list[i].goods_stock %></span>
+						</td>
+						<td class="cen">
+							<span><%= list[i].virtual_sales %></span>
+						</td>
+						<td class="cen">
+							<a href="#" title="查看">
+								<img width="21px" height="21px" src="/img/icon_view.gif" alt="" />
+							</a>
+							<a href="#" title="编辑" class= "updateGoods">
+								<img width="21px" height="21px" src="/img/icon_edit.gif" alt="" />
+							</a>
+							<a href="#" title="复制">
+								<img width="21px" height="21px" src="/img/icon_copy.gif" alt="" />
+							</a>
+							<a href="#" title="回收站" class="removeGoods">
+								<img width="21px" height="21px" src="/img/icon_trash.gif" alt="" />
+							</a>
+						</td>
+					</tr>
+					<% } %>
 				</tbody>
 			</table>
 			<table id="page-tale" cellspacing="0">
-				<tbody>
 					<tr>
 						<td>
 							<div id="page-1">
 								总计<span id="totalRecords">33</span>个记录分为<span id="totalPages">2</span>页当前第<span id="pageCurrent">1</span>页，每页<input type="text" size="3" id="pageSize" value="15" onkeypress="" /> | 
 								<span id="page-link">
-									<a href="javascript:;">第一页</a>
-									<a href="javascript:;">上一页</a>
-									<a href="javascript:;">下一页</a>
-									<a href="javascript:;">最末页</a>
+									<a href="#">第一页</a>
+									<a href="#" id="uppage">上一页</a>
+									<a href="#">下一页</a>
+									<a href="#" id= "downpage">最末页</a>
 									<select name="" id="gotoPage">
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -88,7 +140,6 @@
 							</div>
 						</td>
 					</tr>
-				</tbody>
 			</table>
 		</div>
 		<div>
@@ -107,10 +158,133 @@
 			</select>
 			<input type="submit" value="确定" class="button" />
 		</div>
-	</form>
+	<!--</form>-->
 	<div class="footer">
 		共执行 7 个查询，用时 0.022329 秒，Gzip 已禁用，内存占用 3.574 MB<br>
 		版权所有 © 2005-2018 上海商派软件有限公司，并保留所有权利。
 	</div>
 </body>
 </html>
+<script>
+	var index = 1;
+	var indexPage = 1;
+	var pageIndex = 0;
+		
+	var Remove = document.getElementsByClassName("removeGoods");
+	var Update = document.getElementsByClassName("updateGoods");
+	
+	var oTotalRecords = document.getElementById("totalRecords");//记录
+	var oTotalPages = document.getElementById("totalPages");//当前页
+	var oPageCurrent = document.getElementById("pageCurrent");//每页
+	oPageCurrent.innerHTML = indexPage;
+	//console.log( Remove.length );
+	for( var i = 0 ; i < Remove.length ; i ++ ){
+		//console.log( Remove[i] );
+		Remove[i].onclick = function(){
+			var thisName = this.parentNode.parentNode.firstElementChild.nextElementSibling.firstElementChild.innerHTML;
+			var thisname = this.parentNode.parentNode.parentNode;
+			//thisName 商品名称
+			//console.log( thisname );
+			var that = this;
+			$.ajax({
+				type : "post",
+				url : "/removegoods",
+				data : 	{
+							goodId: thisName,
+						},
+				success : function(res){
+					alert( res.message );
+					if( res.code == -444 ){
+						thisname.removeChild(that.parentNode.parentNode)
+					}
+				}
+			})
+		}
+	}
+	
+</script>
+<script>
+	//模糊查询
+	var oButton = document.getElementsByClassName("button")[0];
+	var oKeyword = document.getElementsByClassName("keyword")[0];
+	oButton.onclick = function(){
+		$(".goodstr").nextAll().remove();
+		var oKeywordvalue = oKeyword.value;
+		$.ajax({
+			type : "get",
+			url  : "/list",
+			async: true,
+			data : {
+					condition:oKeywordvalue
+			},
+			success:function(res){
+				console.log( res );
+				
+				var reslength = res.length;
+				
+				for( let i = 0 ; i < reslength ;i ++ ){
+					var goods_name = res[i].goods_name;
+					var	goods_sn = res[i].goods_sn;
+					var	price = res[i].price;
+					var	virtual_sales = res[i].virtual_sales;
+					var	market_price = res[i].market_price;
+					var	goods_stock = res[i].goods_stock;
+					var	identifie = res[i].identifie;
+					var	img = res[i].img;
+					var oBr = `<tr>
+									<td class="left">
+										<input type="checkbox" name="check" id="check" value="" />
+										<span>${identifie}</span>
+									</td>
+									<td class="first-cell">
+										<span>${goods_name}</span>
+									</td>
+									<td class="cen">
+										<span>${goods_sn}</span>
+									</td>
+									<td class="cen">
+										<span>${price}</span>
+									</td>
+									<td clas="cen">
+										<img src="/img/no.gif" />
+									</td>
+									<td clas="cen">
+										<img src="/img/yes.gif" />
+									</td>
+									<td clas="cen">
+										<img src="/img/no.gif" />
+									</td>
+									<td clas="cen">
+										<img src="/img/yes.gif" />
+									</td>
+									<td class="cen">
+										<span>${market_price}</span>
+									</td>
+									<td class="cen">
+										<span>${goods_stock}</span>
+									</td>
+									<td class="cen">
+										<span>${virtual_sales}</span>
+									</td>
+									<td class="cen">
+										<a href="#" title="查看">
+											<img width="21px" height="21px" src="/img/icon_view.gif" alt="" />
+										</a>
+										<a href="#" title="编辑" class= "updateGoods">
+											<img width="21px" height="21px" src="/img/icon_edit.gif" alt="" />
+										</a>
+										<a href="#" title="复制">
+											<img width="21px" height="21px" src="/img/icon_copy.gif" alt="" />
+										</a>
+										<a href="#" title="回收站" class="removeGoods">
+											<img width="21px" height="21px" src="/img/icon_trash.gif" alt="" />
+										</a>
+									</td>
+								</tr>`;
+								
+								$( oBr ).appendTo($(".table_goods"));
+				}
+			}
+		});
+	}
+</script>

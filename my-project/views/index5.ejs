@@ -36,13 +36,13 @@
 		</div>
 		<div id="yabbody-div">
 			<div class="comment">
-				<form action="" method="post" name="theForm">
+				<form id="frm" action="/api/index5" method="post" name="theForm" enctype="multipart/form-data">
 					<table width="90%" id="general-table" align="center" class="goods-info" style="display: table;">
 						<tbody>
 							<tr>
 								<td class="lable">商品名称：</td>
 								<td>
-									<input type="text" name="good-name" style="float: left;" size="30" />
+									<input type="text" name="goods_name" style="float: left;" size="30" />
 									<select name="goods-name-style">
 										<option value="">字体样式</option>
 										<option value="strong">加粗</option>
@@ -56,7 +56,7 @@
 							<tr>
 								<td class="lable">商品货号：</td>
 								<td>
-									<input type="text" name="goods-sn" size="20" />
+									<input type="text" name="goods_sn" size="20" />
 									<span id="goods-sn-notice" style="color: red;"></span><br>
 									<span class="notice-span" style="display: block;" id="noticeGoodsSn">如果您不输入商品货号，系统将自动生成一个唯一的货号。</span>
 								</td>
@@ -64,7 +64,7 @@
 							<tr>
 								<td class="lable">商品分类：</td>
 								<td>
-									<select name="cat_id" onchange="hideCatDiv()">
+									<select name="cat_id">
 										<option value="0">请选择...</option>
 										<option value="132">钻石</option>
 										<option value="190">&nbsp;&nbsp;&nbsp;&nbsp;衬衫</option>
@@ -227,7 +227,7 @@
 							<tr>
 								<td class="lable"> 上传商品图片：</td>
 								<td>
-									<input type="file" name="goods-img" size="35" />
+									<input type="file" id="goods_img" name="goods_img" size="35" multiple="multiple"  />
 									<!--<img src="../Nodejs1725/img/no.gif" alt="" />--><br>
 									<input type="text" size="40" value="商品外部URL" name="goods_img_url" />
 								</td>
@@ -429,7 +429,7 @@
 				</form>
 			</div>
 			<div class="button-div">
-				<input type="button" class="button" value="确定" />
+				<input type="button" class="button" value="确定" onclick="addGoods()" />
 				<input type="reset" class="button" value="重置" />
 			</div>
 		
@@ -450,4 +450,9 @@
 		var index = $(this).index();
 		$('.comment').eq(index).show().siblings().hide();
 	})
+</script>
+<script>
+	function addGoods(){
+		document.getElementById('frm').submit();
+	}
 </script>

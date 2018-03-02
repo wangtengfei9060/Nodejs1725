@@ -95,6 +95,36 @@ h1{
 	padding: 15px;
 	margin: 10px 0;
 }
-
-
-
+.list-div td{
+	/*border: 1px solid grey;*/
+	color: #192E32;
+	font-size: 12px;
+	padding: 10px;
+	line-height: 39px;
+	background: #fff;
+}
+.list-div input{
+	vertical-align: middle;
+}
+.list-div .first-cell{
+	padding: 10px;
+	background: #fff;
+	font-weight: 900;
+}
+.cen{
+	text-align: center;
+}
+.list-div img{
+	vertical-align: middle;
+	display: inline-block;
+}
+table{
+    display: table;
+    border-collapse: separate;
+    border-spacing: 0px;
+    border-color: #ddd;
+    text-align: center;
+}
+.left{
+	text-align: left;
+}
