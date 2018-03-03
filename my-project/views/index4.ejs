@@ -113,7 +113,7 @@
 							<a href="#" title="复制">
 								<img width="21px" height="21px" src="/img/icon_copy.gif" alt="" />
 							</a>
-							<a href="#" title="回收站" class="removeGoods">
+							<a href="javascript:;" title="回收站" class="removeGoods">
 								<img width="21px" height="21px" src="/img/icon_trash.gif" alt="" />
 							</a>
 						</td>
@@ -125,13 +125,15 @@
 					<tr>
 						<td>
 							<div id="page-1">
-								总计<span id="totalRecords"></span>个记录分为<span id="totalPages"></span>页当前第<span id="pageCurrent"></span>页，每页<input type="text" size="3" id="pageSize" value="15" /> | 
+								总计<span id="totalRecords"><%= total %></span>个记录分为<span id="totalPages"><%= pageSum %></span>页当前第<span id="pageCurrent"><%= pageNo %></span>页，每页<input type="text" size="3" id="pageSize" value="<%= resultslength %>" /> | 
 								<span id="page-link">
-									<a href="/index4?pageNo=1>&count=3">第一页</a>
+									<a href="/index4?pageNo=1>&count=5">第一页</a>
 									<% if(pageNo > 1) {%>
-										<a href="/index4?pageNo=<%= pageNo-1 %>&count=<%= count %>" id="uppage">上一页</a>
+										<a id="aLeft" href="/index4?pageNo=<%= pageNo-1 %>&count=<%= count %>" id="uppage">上一页</a>
 									<% } %>	
-									<a href="/index4?pageNo=<%= pageNo+1 %>&count=<%= count %>">下一页</a>
+									<% if(pageNo != pageSum) {%>
+									<a  id="aRight" href="/index4?pageNo=<%= pageNo+1 %>&count=<%= count %>">下一页</a>
+									<% } %>	
 									<a href="#" id= "downpage">最末页</a>
 									<select name="" id="gotoPage">
 										<option value="1">1</option>
@@ -184,7 +186,7 @@
 			var that = this;
 			$.ajax({
 				type : "post",
-				url : "/removegoods",
+				url : "/api/removegoods",
 				data : 	{
 							goodId: thisName,
 						},
@@ -200,22 +202,51 @@
 	
 </script>
 <script>
-	var indexPage = 1;
-	var pageIndex = 0;
+	var indexPage = 1;//页码  默认显示第一页  pageNo
+	var pageNum = 5;//每页的数据量 count
 	
 	var oTotalRecords = document.getElementById("totalRecords");//记录
 	var oTotalPages = document.getElementById("totalPages");//分为几页
-	var oPageCurrent = document.getElementById("pageCurrent");//第几页
-	oPageCurrent.innerHTML = indexPage;
+//	var oPageCurrent = document.getElementById("pageCurrent");//第几页
+//	oPageCurrent.innerHTML = indexPage;
 	//模糊查询
 	var oButton = document.getElementsByClassName("button")[0];
 	var oKeyword = document.getElementsByClassName("keyword")[0];
+	
+	var oALeft = document.getElementById('aLeft');
+	var oARight = document.getElementById('aRight');
+	
 	oButton.onclick = function(){
+		getData();
+		
+		//	//点击下一页
+//		oARight.onclick = function(){
+//			oARight.href = "javascript:;";
+//			if( pageNo == pageSum ){
+//				pageNo = pageSum;
+//			}else{
+//				pageNo++;
+//			}
+//			getData();
+//		}
+	}
+	//点击上一页
+	oALeft.onclick = function(){
+		oALeft.href = "javascript:;";
+		if( pageNo == 1 ){
+			pageNo = 1;
+		}else{
+			pageNo--;
+		}
+		getData();
+	}
+
+	function getData(){
 		$(".goodstr").nextAll().remove();
 		var oKeywordvalue = oKeyword.value;
 		$.ajax({
 			type : "get",
-			url  : "/list",
+			url  : "/api/list",
 			async: true,
 			data : {
 					condition:oKeywordvalue
@@ -224,8 +255,10 @@
 				console.log( res );
 				
 				var reslength = res.data.length;
-
-				for( let i = 0 ; i < reslength ;i ++ ){
+				var pageNo = res.info.pageNo;
+				var count = res.info.count;
+				
+				for( let i = (pageNo-1)*count ; i < pageNo*count ;i ++ ){
 					var goods_name = res.data[i].goods_name;
 					var	goods_sn = res.data[i].goods_sn;
 					var	price = res.data[i].price;
@@ -234,62 +267,71 @@
 					var	goods_stock = res.data[i].goods_stock;
 					var	identifie = res.data[i].identifie;
 					var	img = res.data[i].img;
-					var oBr = `<tr>
-									<td class="left">
-										<input type="checkbox" name="check" id="check" value="" />
-										<span>${identifie}</span>
-									</td>
-									<td class="first-cell">
-										<span>${goods_name}</span>
-									</td>
-									<td class="cen">
-										<span>${goods_sn}</span>
-									</td>
-									<td class="cen">
-										<span>${price}</span>
-									</td>
-									<td clas="cen">
-										<img src="/img/no.gif" />
-									</td>
-									<td clas="cen">
-										<img src="/img/yes.gif" />
-									</td>
-									<td clas="cen">
-										<img src="/img/no.gif" />
-									</td>
-									<td clas="cen">
-										<img src="/img/yes.gif" />
-									</td>
-									<td class="cen">
-										<span>${market_price}</span>
-									</td>
-									<td class="cen">
-										<span>${goods_stock}</span>
-									</td>
-									<td class="cen">
-										<span>${virtual_sales}</span>
-									</td>
-									<td class="cen">
-										<a href="#" title="查看">
-											<img width="21px" height="21px" src="/img/icon_view.gif" alt="" />
-										</a>
-										<a href="#" title="编辑" class= "updateGoods">
-											<img width="21px" height="21px" src="/img/icon_edit.gif" alt="" />
-										</a>
-										<a href="#" title="复制">
-											<img width="21px" height="21px" src="/img/icon_copy.gif" alt="" />
-										</a>
-										<a href="#" title="回收站" class="removeGoods">
-											<img width="21px" height="21px" src="/img/icon_trash.gif" alt="" />
-										</a>
-									</td>
-								</tr>`;
-								
-								$( oBr ).appendTo($(".table_goods"));
-								console.log( reslength );
-								oTotalRecords.innerHTML = reslength;
-								oTotalPages.innerHTML = parseInt( Math.ceil( reslength/5 ) );
+					var oBr = "";
+					//for( var n = (pageNo-1)*count; n < pageNo*count ; n ++ ){
+						if( i < res.data.length ){
+							oBr = `<tr>
+										<td class="left">
+											<input type="checkbox" name="check" id="check" value="" />
+											<span>${identifie}</span>
+										</td>
+										<td class="first-cell">
+											<span>${goods_name}</span>
+										</td>
+										<td class="cen">
+											<span>${goods_sn}</span>
+										</td>
+										<td class="cen">
+											<span>${price}</span>
+										</td>
+										<td clas="cen">
+											<img src="/img/no.gif" />
+										</td>
+										<td clas="cen">
+											<img src="/img/yes.gif" />
+										</td>
+										<td clas="cen">
+											<img src="/img/no.gif" />
+										</td>
+										<td clas="cen">
+											<img src="/img/yes.gif" />
+										</td>
+										<td class="cen">
+											<span>${market_price}</span>
+										</td>
+										<td class="cen">
+											<span>${goods_stock}</span>
+										</td>
+										<td class="cen">
+											<span>${virtual_sales}</span>
+										</td>
+										<td class="cen">
+											<a href="#" title="查看">
+												<img width="21px" height="21px" src="/img/icon_view.gif" alt="" />
+											</a>
+											<a href="#" title="编辑" class= "updateGoods">
+												<img width="21px" height="21px" src="/img/icon_edit.gif" alt="" />
+											</a>
+											<a href="#" title="复制">
+												<img width="21px" height="21px" src="/img/icon_copy.gif" alt="" />
+											</a>
+											<a href="#" title="回收站" class="removeGoods">
+												<img width="21px" height="21px" src="/img/icon_trash.gif" alt="" />
+											</a>
+										</td>
+									</tr>`;
+						}
+					//}
+						
+					$( oBr ).appendTo($(".table_goods"));
+					console.log( reslength );
+					oTotalRecords.innerHTML = reslength;
+					oTotalPages.innerHTML = parseInt( Math.ceil( reslength/5 ) );
+					//(pageNo-1)*count+docs.length
 				}
+				//处理 页面中页码数量
+				//计算总页数 
+				
 			}
 		});
 	}

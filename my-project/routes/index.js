@@ -25,18 +25,23 @@ router.get('/index3', function(req, res, next) {
 //		res.render("index4",{list: docs});
 //	})
 //});
+
 router.get('/index4', function(req, res, next) {
 	var pageNo = parseInt(req.query.pageNo || 1);//第几页
 	var count = parseInt(req.query.count || 5);//每页内容的数量
-	var query = GoodsModel.find({}).skip( (pageNo-1)*count ).limit(count).sort({create_date:-1});
-	query.exec( function(err, results){
-		res.render("index4",{list: results,pageNo : pageNo , count : count});
-		console.log( results.length,pageNo,count );
-	} )
-//	GoodsModel.find({},function(err,docs){
-//		res.render('index4', {list: docs});
-//	})
+	
+	GoodsModel.count({}, function(err,total){
+		var query = GoodsModel.find({}).skip( (pageNo-1)*count ).limit(count).sort({create_date:-1});
+		var pageSum = parseInt(Math.ceil( total/count ));
+		query.exec(function(err, results){
+			var resultslength = results.length;
+			res.render("index4",{list: results , pageNo : pageNo , count : count , pageSum : pageSum , total : total , resultslength : resultslength});
+			
+			console.log( results.length,pageNo,count,total );
+		});
+	});	
 });
+
 //addGoods
 router.get('/index5', function(req, res, next) {
   res.render('index5', { title: 'Express' });
@@ -127,7 +132,7 @@ router.post('/api/login',function(req,res,next){
 //});
 
 //删除商品
-router.post('/removegoods', function(req, res, next){
+router.post('/api/removegoods', function(req, res, next){
 	var result = {
 			code: 1,
 			message: "商品删除失败"
@@ -144,13 +149,20 @@ router.post('/removegoods', function(req, res, next){
 
 
 //模糊查询
-router.get('/list', function(req,res,next){
+router.get('/api/list', function(req,res,next){
 	var condition = req.query.condition;
 	
+	var pageNo = parseInt(req.query.pageNo || 1);//第几页
+	var count = parseInt(req.query.count || 5);//每页内容的数量
+	
 	GoodsModel.count({goods_name : {$regex : condition}}, function(err,total){
-		var query = GoodsModel.find({ goods_name : {$regex:condition} })
+		
+		var pageSum = parseInt(Math.ceil( total/count ));
+		
+		var query = GoodsModel.find({ goods_name : {$regex:condition} }).skip( (pageNo-1)*count  ).limit().sort({create_date:-1})
 		query.exec(function(err,docs){
 			var result = {
+				info : {pageNo:pageNo,count:count,pageSum:pageSum},
 				total : total,
 				data : docs
 			}
