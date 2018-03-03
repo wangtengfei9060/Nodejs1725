@@ -68,7 +68,7 @@
 						</th>
 					</tr>
 					<% for(var i=0;i<list.length;i++){ %>
-					<tr>
+					<tr class="com">
 						<td class="left">
 							<input type="checkbox" name="check" id="check" value="" />
 							<span><%= list[i].identifie %></span>
@@ -125,11 +125,13 @@
 					<tr>
 						<td>
 							<div id="page-1">
-								总计<span id="totalRecords">33</span>个记录分为<span id="totalPages">2</span>页当前第<span id="pageCurrent">1</span>页，每页<input type="text" size="3" id="pageSize" value="15" onkeypress="" /> | 
+								总计<span id="totalRecords"></span>个记录分为<span id="totalPages"></span>页当前第<span id="pageCurrent"></span>页，每页<input type="text" size="3" id="pageSize" value="15" /> | 
 								<span id="page-link">
-									<a href="#">第一页</a>
-									<a href="#" id="uppage">上一页</a>
-									<a href="#">下一页</a>
+									<a href="/index4?pageNo=1>&count=3">第一页</a>
+									<% if(pageNo > 1) {%>
+										<a href="/index4?pageNo=<%= pageNo-1 %>&count=<%= count %>" id="uppage">上一页</a>
+									<% } %>	
+									<a href="/index4?pageNo=<%= pageNo+1 %>&count=<%= count %>">下一页</a>
 									<a href="#" id= "downpage">最末页</a>
 									<select name="" id="gotoPage">
 										<option value="1">1</option>
@@ -166,17 +168,11 @@
 </body>
 </html>
 <script>
-	var index = 1;
-	var indexPage = 1;
-	var pageIndex = 0;
-		
+	
 	var Remove = document.getElementsByClassName("removeGoods");
 	var Update = document.getElementsByClassName("updateGoods");
-	
-	var oTotalRecords = document.getElementById("totalRecords");//记录
-	var oTotalPages = document.getElementById("totalPages");//当前页
-	var oPageCurrent = document.getElementById("pageCurrent");//每页
-	oPageCurrent.innerHTML = indexPage;
+//	
+
 	//console.log( Remove.length );
 	for( var i = 0 ; i < Remove.length ; i ++ ){
 		//console.log( Remove[i] );
@@ -204,6 +200,13 @@
 	
 </script>
 <script>
+	var indexPage = 1;
+	var pageIndex = 0;
+	
+	var oTotalRecords = document.getElementById("totalRecords");//记录
+	var oTotalPages = document.getElementById("totalPages");//分为几页
+	var oPageCurrent = document.getElementById("pageCurrent");//第几页
+	oPageCurrent.innerHTML = indexPage;
 	//模糊查询
 	var oButton = document.getElementsByClassName("button")[0];
 	var oKeyword = document.getElementsByClassName("keyword")[0];
@@ -220,17 +223,17 @@
 			success:function(res){
 				console.log( res );
 				
-				var reslength = res.length;
-				
+				var reslength = res.data.length;
+
 				for( let i = 0 ; i < reslength ;i ++ ){
-					var goods_name = res[i].goods_name;
-					var	goods_sn = res[i].goods_sn;
-					var	price = res[i].price;
-					var	virtual_sales = res[i].virtual_sales;
-					var	market_price = res[i].market_price;
-					var	goods_stock = res[i].goods_stock;
-					var	identifie = res[i].identifie;
-					var	img = res[i].img;
+					var goods_name = res.data[i].goods_name;
+					var	goods_sn = res.data[i].goods_sn;
+					var	price = res.data[i].price;
+					var	virtual_sales = res.data[i].virtual_sales;
+					var	market_price = res.data[i].market_price;
+					var	goods_stock = res.data[i].goods_stock;
+					var	identifie = res.data[i].identifie;
+					var	img = res.data[i].img;
 					var oBr = `<tr>
 									<td class="left">
 										<input type="checkbox" name="check" id="check" value="" />
@@ -283,8 +286,12 @@
 								</tr>`;
 								
 								$( oBr ).appendTo($(".table_goods"));
+								console.log( reslength );
+								oTotalRecords.innerHTML = reslength;
+								oTotalPages.innerHTML = parseInt( Math.ceil( reslength/5 ) );
 				}
 			}
 		});
 	}
 </script>
+

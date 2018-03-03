@@ -20,10 +20,22 @@ router.get('/index3', function(req, res, next) {
   res.render('index3', { title: 'Express' });
 });
 //显示页面
+//router.get('/index4', function(req, res, next) {
+//	GoodsModel.find({},function(err,docs){
+//		res.render("index4",{list: docs});
+//	})
+//});
 router.get('/index4', function(req, res, next) {
-	GoodsModel.find({},function(err,docs){
-		res.render("index4",{list: docs});
-	})
+	var pageNo = parseInt(req.query.pageNo || 1);//第几页
+	var count = parseInt(req.query.count || 5);//每页内容的数量
+	var query = GoodsModel.find({}).skip( (pageNo-1)*count ).limit(count).sort({create_date:-1});
+	query.exec( function(err, results){
+		res.render("index4",{list: results,pageNo : pageNo , count : count});
+		console.log( results.length,pageNo,count );
+	} )
+//	GoodsModel.find({},function(err,docs){
+//		res.render('index4', {list: docs});
+//	})
 });
 //addGoods
 router.get('/index5', function(req, res, next) {
@@ -135,17 +147,18 @@ router.post('/removegoods', function(req, res, next){
 router.get('/list', function(req,res,next){
 	var condition = req.query.condition;
 	
-	GoodsModel.count({goods_name : {$regex : condition}}, function(err,count){
+	GoodsModel.count({goods_name : {$regex : condition}}, function(err,total){
 		var query = GoodsModel.find({ goods_name : {$regex:condition} })
 		query.exec(function(err,docs){
 			var result = {
-				total : count,
+				total : total,
 				data : docs
 			}
-			console.log( count,docs );
+			console.log( total,docs );
 			
-			res.send(docs);
+			res.send(result);
 		});
 	})
 })
+
 module.exports = router;
