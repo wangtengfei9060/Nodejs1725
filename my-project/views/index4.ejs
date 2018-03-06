@@ -220,26 +220,26 @@
 		getData();
 		
 		//	//点击下一页
-//		oARight.onclick = function(){
-//			oARight.href = "javascript:;";
-//			if( pageNo == pageSum ){
-//				pageNo = pageSum;
-//			}else{
-//				pageNo++;
-//			}
-//			getData();
-//		}
+		oARight.onclick = function(){
+			oARight.href = "javascript:;";
+			if( pageNo == pageSum ){
+				pageNo = pageSum;
+			}else{
+				pageNo++;
+			}
+			getData();
+		}
 	}
 	//点击上一页
-	oALeft.onclick = function(){
-		oALeft.href = "javascript:;";
-		if( pageNo == 1 ){
-			pageNo = 1;
-		}else{
-			pageNo--;
-		}
-		getData();
-	}
+//	oALeft.onclick = function(){
+//		oALeft.href = "javascript:;";
+//		if( pageNo == 1 ){
+//			pageNo = 1;
+//		}else{
+//			pageNo--;
+//		}
+//		getData();
+//	}
 
 	function getData(){
 		$(".goodstr").nextAll().remove();
